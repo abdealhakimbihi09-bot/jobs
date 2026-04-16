@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --section-bg: #f9fafb;
+  --highlight-bg: #eff6ff;
+  --text-main: #0f172a;
+  --text-muted: #4b5563;
+  --accent-text: #2563eb;
+  --border-color: #e5e7eb;
+  --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --overlay-opacity: 0.4;
+}
+
+/* Base styles are Light Mode. .dark class overrides for Dark Mode */
+.dark {
+  --bg: #0f172a;
+  --surface: #1e293b;
+  --section-bg: #1e293b;
+  --highlight-bg: rgba(37, 99, 235, 0.1);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --accent-text: #3b82f6;
+  --border-color: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  --card-shadow-hover: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  --overlay-opacity: 0.85;
+}
+
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-section: var(--section-bg);
+  --color-highlight: var(--highlight-bg);
+  --color-text-main: var(--text-main);
+  --color-text-muted: var(--text-muted);
+  --color-text-accent: var(--accent-text);
+  --color-border-theme: var(--border-color);
+  --shadow-theme: var(--card-shadow);
+  --shadow-theme-hover: var(--card-shadow-hover);
+  --radius-card: 16px; /* Slightly tighter rounded corners for modern utility feel */
+  --background-accent: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+@layer utilities {
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+}
+
+body {
+  @apply antialiased bg-bg text-text-main transition-colors duration-300;
+  font-family: 'Inter', sans-serif;
+}
