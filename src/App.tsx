@@ -4,7 +4,8 @@ import HeroSection from "./components/HeroSection";
 import CountriesList from "./components/CountriesList";
 import CountryCategoriesPage from "./components/CountryCategoriesPage";
 import CategoryDetailPage from "./components/CategoryDetailPage";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider } from "@/context/ThemeContext";
+import { SearchProvider } from "@/context/SearchContext";
 
 function LandingPage() {
   return (
@@ -37,13 +38,15 @@ function LandingPage() {
 export default function App() {
   return (
     <ThemeProvider>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/jobs/:countrySlug" element={<CountryCategoriesPage />} />
-          <Route path="/jobs/:countrySlug/category/:categorySlug" element={<CategoryDetailPage />} />
-        </Routes>
-      </Router>
+      <SearchProvider>
+        <Router>
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/jobs/:countrySlug" element={<CountryCategoriesPage />} />
+            <Route path="/jobs/:countrySlug/category/:categorySlug" element={<CategoryDetailPage />} />
+          </Routes>
+        </Router>
+      </SearchProvider>
     </ThemeProvider>
   );
 }

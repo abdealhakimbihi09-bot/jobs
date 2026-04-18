@@ -2,14 +2,20 @@ import { useState, useEffect } from "react";
 import CountryCard from "./CountryCard";
 import { countries } from "../constants";
 import { motion, AnimatePresence } from "motion/react";
+import { useSearch } from "@/context/SearchContext";
 
 export default function CountriesList() {
   const [isLoading, setIsLoading] = useState(true);
+  const { searchQuery } = useSearch();
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 1500);
+    const timer = setTimeout(() => setIsLoading(false), 800);
     return () => clearTimeout(timer);
   }, []);
+
+  const filteredCountries = countries.filter(country =>
+    country.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
@@ -40,9 +46,15 @@ export default function CountriesList() {
               animate={{ opacity: 1 }}
               className="contents"
             >
-              {countries.map((country, index) => (
-                <CountryCard key={country.name} country={country} index={index} />
-              ))}
+              {filteredCountries.length > 0 ? (
+                filteredCountries.map((country, index) => (
+                  <CountryCard key={country.name} country={country} index={index} />
+                ))
+              ) : (
+                <div className="col-span-full py-20 text-center">
+                  <p className="text-text-muted text-lg font-medium">No countries found matching "{searchQuery}"</p>
+                </div>
+              )}
             </motion.div>
           )}
         </AnimatePresence>

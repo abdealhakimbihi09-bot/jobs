@@ -1,8 +1,8 @@
 import { CategoryDetail } from "../types";
 
 export const categoryDetails: Record<string, CategoryDetail> = {
-  "restaurants-chefs": {
-    slug: "restaurants-chefs",
+  "restaurants": {
+    slug: "restaurants",
     title: "Restaurants & Chefs",
     icon: "restaurant",
     items: [
@@ -19,8 +19,8 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "Restaurant Assistant Manager Jobs"
     ]
   },
-  "work-from-home-jobs": {
-    slug: "work-from-home-jobs",
+  "work-from-home": {
+    slug: "work-from-home",
     title: "Work from Home Jobs",
     icon: "remote",
     items: [
@@ -29,8 +29,8 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "Freelance Jobs"
     ]
   },
-  "human-resources-jobs": {
-    slug: "human-resources-jobs",
+  "human-resources": {
+    slug: "human-resources",
     title: "Human Resources Jobs",
     icon: "hr",
     items: [
@@ -44,8 +44,8 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "Training Specialist Jobs"
     ]
   },
-  "women-jobs": {
-    slug: "women-jobs",
+  "women": {
+    slug: "women",
     title: "Women Jobs",
     icon: "women",
     items: [
@@ -59,16 +59,16 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "Beauty Center Jobs"
     ]
   },
-  "government-jobs": {
-    slug: "government-jobs",
+  "government": {
+    slug: "government",
     title: "Government Jobs",
     icon: "government",
     items: [
       "Government Jobs"
     ]
   },
-  "media-press-jobs": {
-    slug: "media-press-jobs",
+  "media": {
+    slug: "media",
     title: "Media and Press Jobs",
     icon: "media",
     items: [
@@ -80,8 +80,8 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "Contributing Editor Jobs"
     ]
   },
-  "administrative-jobs": {
-    slug: "administrative-jobs",
+  "admin": {
+    slug: "admin",
     title: "Administrative Jobs",
     icon: "admin",
     items: [
@@ -128,8 +128,86 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "Program Officer Jobs"
     ]
   },
-  "it-jobs": {
-    slug: "it-jobs",
+  "driving": {
+    slug: "driving",
+    title: "Driving Jobs",
+    icon: "driving",
+    items: [
+      "Driver Jobs",
+      "Delivery Driver Jobs",
+      "Truck Driver Jobs",
+      "Forklift Driver Jobs",
+      "Limousine Driver Jobs",
+      "Loader Operator Jobs",
+      "Digger Driver Jobs",
+      "Shipping Representative Jobs",
+      "Fleet Manager Jobs",
+      "Collection Specialist Jobs"
+    ]
+  },
+  "pr": {
+    slug: "pr",
+    title: "Public Relations Jobs",
+    icon: "pr",
+    items: [
+      "Public Relations Specialist Jobs",
+      "Public Relations Manager Jobs",
+      "Communications Specialist Jobs",
+      "Media Relations Jobs",
+      "Corporate Communications Jobs",
+      "Press Officer Jobs",
+      "CRM Specialist Jobs",
+      "Secretary Jobs"
+    ]
+  },
+  "call-center": {
+    slug: "call-center",
+    title: "Call Center Jobs",
+    icon: "callcenter",
+    items: [
+      "Customer Service Jobs",
+      "Call Center Agent Jobs",
+      "Technical Support Jobs",
+      "Help Desk Jobs",
+      "Telesales Jobs",
+      "Inbound Call Center Jobs",
+      "Outbound Call Center Jobs",
+      "Ticketing Agent Jobs",
+      "Airline Ticketing Agent Jobs"
+    ]
+  },
+  "other": {
+    slug: "other",
+    title: "Other Jobs",
+    icon: "other",
+    items: ["General Jobs", "Entry Level Jobs", "Remote Jobs"]
+  },
+  "industrial": {
+    slug: "industrial",
+    title: "Industrial Jobs",
+    icon: "industrial",
+    items: ["Factory Worker Jobs", "Machine Operator Jobs", "Production Line Jobs"]
+  },
+  "law": {
+    slug: "law",
+    title: "Law Jobs",
+    icon: "law",
+    items: ["Lawyer Jobs", "Legal Assistant Jobs", "Paralegal Jobs"]
+  },
+  "teaching": {
+    slug: "teaching",
+    title: "Teaching Jobs",
+    icon: "teaching",
+    items: ["Teacher Jobs", "Professor Jobs", "Tutor Jobs"]
+  },
+  "labor": {
+    slug: "labor",
+    title: "Skilled Laborers Jobs",
+    icon: "labor",
+    items: ["Electrician Jobs", "Plumber Jobs", "Carpenter Jobs"]
+  },
+  "it": {
+    slug: "it",
     title: "IT Jobs",
     icon: "it",
     items: [
@@ -143,8 +221,32 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "IT Project Manager"
     ]
   },
-  "marketing-jobs": {
-    slug: "marketing-jobs",
+  "programming": {
+    slug: "programming",
+    title: "Programming",
+    icon: "programming",
+    items: ["Frontend Developer", "Backend Developer", "Fullstack Developer"]
+  },
+  "procurement": {
+    slug: "procurement",
+    title: "Procurement Jobs",
+    icon: "procurement",
+    items: ["Purchasing Officer", "Supply Chain Coordinator"]
+  },
+  "sales": {
+    slug: "sales",
+    title: "Sales Jobs",
+    icon: "sales",
+    items: [
+      "Sales Representative",
+      "Sales Manager",
+      "Account Executive",
+      "Retail Sales Associate",
+      "Business Development Manager"
+    ]
+  },
+  "marketing": {
+    slug: "marketing",
     title: "Marketing Jobs",
     icon: "marketing",
     items: [
@@ -157,20 +259,32 @@ export const categoryDetails: Record<string, CategoryDetail> = {
       "Market Research Analyst"
     ]
   },
-  "sales-jobs": {
-    slug: "sales-jobs",
-    title: "Sales Jobs",
-    icon: "sales",
-    items: [
-      "Sales Representative",
-      "Sales Manager",
-      "Account Executive",
-      "Retail Sales Associate",
-      "Business Development Manager"
-    ]
+  "translation": {
+    slug: "translation",
+    title: "Translation Jobs",
+    icon: "translation",
+    items: ["Translator Jobs", "Interpreter Jobs"]
   },
-  "engineering-jobs": {
-    slug: "engineering-jobs",
+  "design": {
+    slug: "design",
+    title: "Art & Design Jobs",
+    icon: "design",
+    items: ["Graphic Designer", "UI/UX Designer", "Interior Designer"]
+  },
+  "medical": {
+    slug: "medical",
+    title: "Healthcare Medical Jobs",
+    icon: "medical",
+    items: ["Doctor Jobs", "Nurse Jobs", "Pharmacist Jobs"]
+  },
+  "finance": {
+    slug: "finance",
+    title: "Accounting and Finance",
+    icon: "finance",
+    items: ["Accountant Jobs", "Financial Analyst Jobs"]
+  },
+  "engineering": {
+    slug: "engineering",
     title: "Engineering Jobs",
     icon: "engineering",
     items: [

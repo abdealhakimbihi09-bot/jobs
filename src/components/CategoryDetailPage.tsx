@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { useSearch } from "@/context/SearchContext";
 import { 
   ArrowLeft, 
   Settings, 
@@ -64,31 +65,26 @@ const iconMap: { [key: string]: any } = {
 export default function CategoryDetailPage() {
   const { categorySlug } = useParams();
   const navigate = useNavigate();
+  const { searchQuery, setSearchQuery } = useSearch();
   
   const detail = categoryDetails[categorySlug || ""];
   
-  if (!detail) {
-    return (
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="max-w-7xl mx-auto px-4 py-20 text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4 tracking-tight">Category not found</h2>
-          <p className="text-gray-500 mb-8">Missing slug: <span className="font-mono bg-gray-100 px-2 py-1 rounded">{categorySlug}</span></p>
-          <button 
-            onClick={() => navigate(-1)}
-            className="px-6 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 transition-colors shadow-sm"
-          >
-            Go Back
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // Fallback if category is not found
+  const displayDetail = detail || {
+    slug: categorySlug || "unknown",
+    title: "Category",
+    icon: "other",
+    items: ["General Jobs", "Entry Level Jobs", "Remote Jobs"]
+  };
 
-  const Icon = iconMap[detail.icon] || Briefcase;
+  const Icon = iconMap[displayDetail.icon] || Briefcase;
+
+  const filteredItems = (displayDetail.items || [])
+    .filter(item => item !== "Government Jobs For Women")
+    .filter(item => item.toLowerCase().includes(searchQuery.toLowerCase()));
 
   return (
-    <div className="min-h-screen bg-white transition-colors duration-300">
+    <div className="min-h-screen bg-bg transition-colors duration-300">
       <Header />
       
       <main className="max-w-5xl mx-auto px-6 py-10 md:py-16">
@@ -98,7 +94,7 @@ export default function CategoryDetailPage() {
           <div className="absolute right-0 top-[-8px] md:top-0">
             <button 
               onClick={() => navigate(-1)}
-              className="px-4 py-2 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all flex items-center gap-2 text-gray-700 shadow-sm border border-gray-200"
+              className="px-4 py-2 bg-highlight-bg dark:bg-surface rounded-xl hover:opacity-80 transition-all flex items-center gap-2 text-text-main shadow-sm border border-border-theme"
             >
               <ArrowLeft className="w-4 h-4" />
               <span className="text-sm font-bold">Back</span>
@@ -107,27 +103,44 @@ export default function CategoryDetailPage() {
 
           <div className="flex flex-col items-center text-center pt-12 md:pt-0">
             {/* Category Icon */}
-            <div className="w-20 h-20 bg-blue-50 rounded-[28px] flex items-center justify-center text-blue-600 mb-6 shadow-sm ring-4 ring-blue-50/50">
+            <div className="w-20 h-20 bg-highlight-bg dark:bg-blue-900/20 rounded-[28px] flex items-center justify-center text-blue-600 mb-6 shadow-sm ring-4 ring-blue-50/50">
               <Icon className="w-10 h-10 stroke-[1.5]" />
             </div>
             
             <h1 className="text-3xl md:text-5xl font-extrabold text-blue-600 tracking-tight">
-              {detail.title}
+              {displayDetail.title}
             </h1>
+            {!detail && (
+              <p className="mt-4 text-text-muted font-medium">Content temporarily unavailable - showing defaults</p>
+            )}
           </div>
         </div>
 
         {/* Subcategory Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {detail.items
-            .filter(item => item !== "Government Jobs For Women")
-            .map((item, index) => (
+          {filteredItems.length > 0 ? (
+            filteredItems.map((item, index) => (
               <SubcategoryCard 
                 key={item} 
                 title={item} 
                 index={index} 
               />
-            ))}
+            ))
+          ) : (
+            <div className="col-span-full py-12 text-center">
+              <p className="text-text-muted text-lg font-medium">
+                {filteredItems.length === 0 && searchQuery ? `No jobs matching "${searchQuery}"` : "Content temporarily unavailable"}
+              </p>
+              {searchQuery && (
+                <button 
+                  onClick={() => setSearchQuery('')}
+                  className="mt-4 text-blue-600 font-bold hover:underline"
+                >
+                  Clear filter
+                </button>
+              )}
+            </div>
+          )}
         </div>
       </main>
     </div>

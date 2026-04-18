@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { useSearch } from "@/context/SearchContext";
 import Header from "./Header";
 import CategoryCard from "./CategoryCard";
 import { categoriesByCountry, defaultCategories } from "../data/categoriesData";
@@ -9,39 +10,56 @@ import { categoriesByCountry, defaultCategories } from "../data/categoriesData";
 export default function CountryCategoriesPage() {
   const { countrySlug } = useParams();
   const [showAll, setShowAll] = useState(false);
+  const { searchQuery, setSearchQuery } = useSearch();
   
   const countryName = countrySlug ? countrySlug.charAt(0).toUpperCase() + countrySlug.slice(1) : "";
   const categories = categoriesByCountry[countrySlug?.toLowerCase() || ""] || defaultCategories;
+
+  const filteredCategories = categories.filter(cat => 
+    cat.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   
   // Initially show 10 categories
   const INITIAL_COUNT = 10;
-  const displayedCategories = showAll ? categories : categories.slice(0, INITIAL_COUNT);
+  const displayedCategories = showAll ? filteredCategories : filteredCategories.slice(0, INITIAL_COUNT);
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] transition-colors duration-300">
+    <div className="min-h-screen bg-bg transition-colors duration-300">
       <Header />
       
       <main className="max-w-md mx-auto px-6 py-8 sm:max-w-7xl">
-        <h1 className="text-[28px] font-extrabold text-gray-900 mb-8 tracking-tight">
+        <h1 className="text-[28px] font-extrabold text-text-main mb-8 tracking-tight">
           Jobs in {countryName}
         </h1>
 
         {/* Categories List */}
         <div className="flex flex-col gap-5">
           <AnimatePresence mode="popLayout">
-            {displayedCategories.map((category, index) => (
-              <CategoryCard 
-                key={category.id || category.name} 
-                category={category} 
-                index={index}
-                country={countrySlug || ""}
-              />
-            ))}
+            {displayedCategories.length > 0 ? (
+              displayedCategories.map((category, index) => (
+                <CategoryCard 
+                  key={category.id || category.name} 
+                  category={category} 
+                  index={index}
+                  country={countrySlug || ""}
+                />
+              ))
+            ) : (
+              <div className="py-20 text-center">
+                <p className="text-text-muted text-lg font-medium">No results found for "{searchQuery}"</p>
+                <button 
+                  onClick={() => setSearchQuery('')}
+                  className="mt-4 text-blue-600 font-bold hover:underline"
+                >
+                  Clear search
+                </button>
+              </div>
+            )}
           </AnimatePresence>
         </div>
 
         {/* Show More / Less Control */}
-        {categories.length > INITIAL_COUNT && (
+        {filteredCategories.length > INITIAL_COUNT && (
           <div className="mt-8 mb-12 text-center">
             <button 
               onClick={() => setShowAll(!showAll)}

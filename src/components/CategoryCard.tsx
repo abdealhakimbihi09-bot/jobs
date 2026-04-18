@@ -79,19 +79,19 @@ export default function CategoryCard({ category, index, country }: CategoryCardP
     >
       <Link
         to={`/jobs/${country}/category/${category.slug}`}
-        className="flex items-center p-6 bg-white rounded-[24px] shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] border border-gray-100/50 hover:shadow-lg transition-all duration-300 active:scale-[0.98]"
+        className="flex items-center p-6 bg-surface rounded-[24px] shadow-theme border border-border-theme hover:shadow-theme-hover transition-all duration-300 active:scale-[0.98]"
       >
         {/* Left: Icon */}
-        <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-gray-900 bg-gray-50 rounded-2xl">
+        <div className="flex-shrink-0 w-14 h-14 flex items-center justify-center text-text-main bg-highlight-bg rounded-2xl">
           <Icon className="w-8 h-8 stroke-[1.25]" />
         </div>
 
         {/* Right: Content */}
         <div className="ml-5 flex-grow">
-          <h4 className="text-[17px] font-bold text-gray-900 leading-tight tracking-tight">
+          <h4 className="text-[17px] font-bold text-text-main leading-tight tracking-tight">
             {category.name}
           </h4>
-          <p className="text-[13px] text-gray-400 font-semibold mt-1">
+          <p className="text-[13px] text-text-muted font-semibold mt-1">
             {category.jobs.toLocaleString()} Open Position
           </p>
         </div>
