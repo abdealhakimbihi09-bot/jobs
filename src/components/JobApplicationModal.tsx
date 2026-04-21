@@ -128,14 +128,14 @@ export default function JobApplicationModal({ isOpen, onClose, jobTitle }: JobAp
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] overflow-y-auto overflow-x-hidden flex justify-center items-start md:items-center py-8 sm:py-12 px-4 scroll-smooth">
           {/* Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={handleOverlayClick}
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm"
           />
 
           {/* Modal Content */}
@@ -143,7 +143,7 @@ export default function JobApplicationModal({ isOpen, onClose, jobTitle }: JobAp
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-xl bg-white dark:bg-[#121212] rounded-[32px] shadow-2xl overflow-hidden border border-gray-200 dark:border-white/10"
+            className="relative w-full max-w-xl bg-white dark:bg-[#121212] rounded-[32px] shadow-2xl border border-gray-200 dark:border-white/10 my-auto"
           >
             {/* Header */}
             <div className="px-8 pt-8 pb-6 border-b border-gray-100 dark:border-white/5">
