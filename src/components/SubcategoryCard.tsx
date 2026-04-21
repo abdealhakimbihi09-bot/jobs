@@ -4,12 +4,14 @@ import { motion } from "motion/react";
 interface SubcategoryCardProps {
   title: string;
   index: number;
+  onClick?: () => void;
   key?: string;
 }
 
-export default function SubcategoryCard({ title, index }: SubcategoryCardProps) {
+export default function SubcategoryCard({ title, index, onClick }: SubcategoryCardProps) {
   return (
     <motion.button
+      onClick={onClick}
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: index * 0.03 }}

@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 
 export default function HeroSection() {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 text-center transition-colors duration-300">
+    <section className="pt-8 pb-16 px-4 sm:px-6 lg:px-8 text-center transition-colors duration-300">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

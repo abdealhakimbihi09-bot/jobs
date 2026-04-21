@@ -1,14 +1,14 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, ArrowLeft } from "lucide-react";
 import { useSearch } from "@/context/SearchContext";
-import Header from "./Header";
 import CategoryCard from "./CategoryCard";
 import { categoriesByCountry, defaultCategories } from "../data/categoriesData";
 
 export default function CountryCategoriesPage() {
   const { countrySlug } = useParams();
+  const navigate = useNavigate();
   const [showAll, setShowAll] = useState(false);
   const { searchQuery, setSearchQuery } = useSearch();
   
@@ -25,9 +25,18 @@ export default function CountryCategoriesPage() {
 
   return (
     <div className="min-h-screen bg-bg transition-colors duration-300">
-      <Header />
-      
-      <main className="max-w-md mx-auto px-6 py-8 sm:max-w-7xl">
+      <main className="max-w-md mx-auto px-6 pt-2 pb-8 sm:max-w-7xl">
+        {/* Back Button */}
+        <div className="mb-6">
+          <button 
+            onClick={() => navigate(-1)}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-highlight-bg dark:bg-surface rounded-xl hover:opacity-80 transition-all text-text-main shadow-sm border border-border-theme font-bold text-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </button>
+        </div>
+
         <h1 className="text-[28px] font-extrabold text-text-main mb-8 tracking-tight">
           Jobs in {countryName}
         </h1>

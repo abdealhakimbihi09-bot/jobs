@@ -1,16 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
 import HeroSection from "./components/HeroSection";
 import CountriesList from "./components/CountriesList";
 import CountryCategoriesPage from "./components/CountryCategoriesPage";
 import CategoryDetailPage from "./components/CategoryDetailPage";
+import ApplicationSuccess from "./components/ApplicationSuccess";
 import { ThemeProvider } from "@/context/ThemeContext";
 import { SearchProvider } from "@/context/SearchContext";
 
 function LandingPage() {
   return (
     <div className="min-h-screen bg-bg transition-colors duration-300">
-      <Header />
       <main className="content-wrapper">
         <HeroSection />
         <CountriesList />
@@ -44,6 +43,7 @@ export default function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/jobs/:countrySlug" element={<CountryCategoriesPage />} />
             <Route path="/jobs/:countrySlug/category/:categorySlug" element={<CategoryDetailPage />} />
+            <Route path="/application-success" element={<ApplicationSuccess />} />
           </Routes>
         </Router>
       </SearchProvider>

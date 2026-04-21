@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSearch } from "@/context/SearchContext";
 import { 
@@ -32,7 +33,7 @@ import {
 import { motion } from "motion/react";
 import SubcategoryCard from "./SubcategoryCard";
 import { categoryDetails } from "../data/categoryDetails";
-import Header from "./Header";
+import JobApplicationModal from "./JobApplicationModal";
 
 const iconMap: { [key: string]: any } = {
   engineering: Settings,
@@ -66,6 +67,8 @@ export default function CategoryDetailPage() {
   const { categorySlug } = useParams();
   const navigate = useNavigate();
   const { searchQuery, setSearchQuery } = useSearch();
+  const [selectedJob, setSelectedJob] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   
   const detail = categoryDetails[categorySlug || ""];
   
@@ -83,12 +86,14 @@ export default function CategoryDetailPage() {
     .filter(item => item !== "Government Jobs For Women")
     .filter(item => item.toLowerCase().includes(searchQuery.toLowerCase()));
 
+  const handleApplyClick = (jobTitle: string) => {
+    setSelectedJob(jobTitle);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="min-h-screen bg-bg transition-colors duration-300">
-      <Header />
-      
-      <main className="max-w-5xl mx-auto px-6 py-10 md:py-16">
-        {/* Header Section */}
+      <main className="max-w-5xl mx-auto px-6 pt-6 pb-10 md:pt-10 md:pb-16">
         <div className="relative mb-12 flex flex-col items-center">
           {/* Back Button - Top Right Positioning */}
           <div className="absolute right-0 top-[-8px] md:top-0">
@@ -124,6 +129,7 @@ export default function CategoryDetailPage() {
                 key={item} 
                 title={item} 
                 index={index} 
+                onClick={() => handleApplyClick(item)}
               />
             ))
           ) : (
@@ -143,6 +149,13 @@ export default function CategoryDetailPage() {
           )}
         </div>
       </main>
+
+      {/* Modal */}
+      <JobApplicationModal 
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        jobTitle={selectedJob || ""}
+      />
     </div>
   );
 }

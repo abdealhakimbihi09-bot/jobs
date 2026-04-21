@@ -92,7 +92,7 @@ export default function CategoryCard({ category, index, country }: CategoryCardP
             {category.name}
           </h4>
           <p className="text-[13px] text-text-muted font-semibold mt-1">
-            {category.jobs.toLocaleString()} Open Position
+            {category.jobs.toLocaleString()} {category.jobs === 1 ? 'Open Position' : 'Open Positions'}
           </p>
         </div>
       </Link>
